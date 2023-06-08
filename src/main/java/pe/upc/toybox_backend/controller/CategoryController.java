@@ -61,7 +61,6 @@ public class CategoryController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo eliminar ...");
         }
     }
-
     private CategoryDTO convertToDto(Category category) {
         ModelMapper modelMapper = new ModelMapper();
         CategoryDTO categoryDTO = modelMapper.map(category, CategoryDTO.class);
