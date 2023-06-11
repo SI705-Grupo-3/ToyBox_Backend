@@ -1,6 +1,7 @@
 package pe.upc.toybox_backend.entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Payment_Methods")
@@ -11,12 +12,12 @@ public class PaymentMethod {
     private String card_holder;
     private int card_number;
     private int security_code;
-    private int expiration_day;
+    private LocalDate expiration_day;
     private String address;
 
     public PaymentMethod() {
     }
-    public PaymentMethod(Long id, String card_holder, int card_number, int security_code, int expiration_day, String address) {
+    public PaymentMethod(Long id, String card_holder, int card_number, int security_code, LocalDate expiration_day, String address) {
         this.id = id;
         this.card_holder = card_holder;
         this.card_number = card_number;
@@ -57,11 +58,11 @@ public class PaymentMethod {
         this.security_code = security_code;
     }
 
-    public int getExpiration_day() {
+    public LocalDate getExpiration_day() {
         return expiration_day;
     }
 
-    public void setExpiration_day(int expiration_day) {
+    public void setExpiration_day(LocalDate expiration_day) {
         this.expiration_day = expiration_day;
     }
 

@@ -1,4 +1,55 @@
 package pe.upc.toybox_backend.controller;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+import pe.upc.toybox_backend.business.ProductRegistrationBusiness;
+import pe.upc.toybox_backend.dtos.ProductRegistrationDTO;
+import pe.upc.toybox_backend.entities.ProductRegistration;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@CrossOrigin(origins = {"http://localhost:4200"})
+@RestController
+@RequestMapping("/api")
 public class ProductRegistrationController {
+    @Autowired
+    private ProductRegistrationBusiness productRegistrationBusiness;
+    @PostMapping("/product-registration") //register
+    public ResponseEntity<ProductRegistrationDTO> registerProductRegistration(@RequestBody ProductRegistrationDTO productRegistrationDTO){
+        ProductRegistration productRegistration;
+        try {
+            productRegistration=convertToEntity(productRegistrationDTO);
+            productRegistrationDTO=convertToDto(productRegistrationBusiness.registerProductRegistration(productRegistration));
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No fue posible registrarlo");
+        }
+        return new ResponseEntity<ProductRegistrationDTO>(productRegistrationDTO, HttpStatus.OK);
+    }
+    @GetMapping("/product-registrations") //list
+    public ResponseEntity<List<ProductRegistrationDTO>> listProductRegistration(){
+        List<ProductRegistration> list = productRegistrationBusiness.listProductRegistration();
+        List<ProductRegistrationDTO> listDto = convertToLisDto(list);
+        return new ResponseEntity<List<ProductRegistrationDTO>>(listDto,HttpStatus.OK);
+    }
+
+    private ProductRegistrationDTO convertToDto(ProductRegistration productRegistration) {
+        ModelMapper modelMapper = new ModelMapper();
+        ProductRegistrationDTO productRegistrationDTO = modelMapper.map(productRegistration, ProductRegistrationDTO.class);
+        return productRegistrationDTO;
+    }
+    private ProductRegistration convertToEntity(ProductRegistrationDTO productRegistrationDTO) {
+        ModelMapper modelMapper = new ModelMapper();
+        ProductRegistration post = modelMapper.map(productRegistrationDTO, ProductRegistration.class);
+        return post;
+    }
+    private List<ProductRegistrationDTO> convertToLisDto(List<ProductRegistration> list){
+        return list.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
 }
