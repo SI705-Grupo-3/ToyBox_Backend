@@ -13,6 +13,7 @@ public class User {
     private String last_name;
     private String email;
     private String phone;
+    @Column(unique = true)
     private String username;
     private String password;
     private String image;

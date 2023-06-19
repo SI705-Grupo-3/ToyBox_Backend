@@ -12,8 +12,7 @@ import java.util.List;
 public class UserBusiness {
     @Autowired
     private UserRepository userRepository;
-    @Transactional
-    //register
+    @Transactional //register
     public User registerUser(User user) {
         return userRepository.save(user);
     }
@@ -21,12 +20,12 @@ public class UserBusiness {
     public List<User> listUser() {
         return userRepository.findAll();
     }
-    //update
+    @Transactional //update
     public User updateUser(User user) throws Exception{
         userRepository.findById(user.getId()).orElseThrow(() -> new Exception("No se encontró la entidad"));
         return userRepository.save(user);
     }
-    //delete
+    @Transactional //delete
     public User deleteUser(Long id) throws Exception{
         User user = userRepository.findById(id).orElseThrow(() -> new Exception("No se encontró la entidad"));
         userRepository.delete(user);

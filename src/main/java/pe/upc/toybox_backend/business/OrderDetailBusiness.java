@@ -12,8 +12,7 @@ import java.util.List;
 public class OrderDetailBusiness {
     @Autowired
     private OrderDetailRepository orderDetailRepository;
-    @Transactional
-    //register
+    @Transactional //register
     public OrderDetail registerOrderDetail(OrderDetail orderDetail) {
         return orderDetailRepository.save(orderDetail);
     }

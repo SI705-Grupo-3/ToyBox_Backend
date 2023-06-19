@@ -13,8 +13,7 @@ import java.util.List;
 public class PaymentMethodBusiness {
     @Autowired
     private PaymentMethodRepository paymentMethodRepository;
-    @Transactional
-    //register
+    @Transactional //register
     public PaymentMethod registerPaymentMethod(PaymentMethod paymentMethod) {
         return paymentMethodRepository.save(paymentMethod);
     }
@@ -22,12 +21,12 @@ public class PaymentMethodBusiness {
     public List<PaymentMethod> listPaymentMethod() {
         return paymentMethodRepository.findAll();
     }
-    //update
+    @Transactional //update
     public PaymentMethod updatePaymentMethod(PaymentMethod paymentMethod) throws Exception{
         paymentMethodRepository.findById(paymentMethod.getId()).orElseThrow(() -> new Exception("No se encontró la entidad"));
         return paymentMethodRepository.save(paymentMethod);
     }
-    //delete
+    @Transactional //delete
     public PaymentMethod deletePaymentMethod(Long id) throws Exception{
         PaymentMethod paymentMethod = paymentMethodRepository.findById(id).orElseThrow(() -> new Exception("No se encontró la entidad"));
         paymentMethodRepository.delete(paymentMethod);

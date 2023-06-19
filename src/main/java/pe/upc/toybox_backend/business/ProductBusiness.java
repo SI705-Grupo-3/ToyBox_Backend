@@ -12,8 +12,7 @@ import java.util.List;
 public class ProductBusiness {
     @Autowired
     private ProductRepository productRepository;
-    @Transactional
-    //register
+    @Transactional //register
     public Product registerProduct(Product product) {
         return productRepository.save(product);
     }

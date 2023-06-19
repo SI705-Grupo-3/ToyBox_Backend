@@ -13,8 +13,7 @@ import java.util.List;
 public class CategoryBusiness {
     @Autowired
     private CategoryRepository categoryRepository;
-    @Transactional
-    //register
+    @Transactional //register
     public Category registerCategory(Category category) {
         return categoryRepository.save(category);
     }
@@ -22,12 +21,12 @@ public class CategoryBusiness {
     public List<Category> listCategory() {
         return categoryRepository.findAll();
     }
-    //update
+    @Transactional //update
     public Category updateCategory(Category category) throws Exception{
         categoryRepository.findById(category.getId()).orElseThrow(() -> new Exception("No se encontró la entidad"));
         return categoryRepository.save(category);
     }
-    //delete
+    @Transactional //delete
     public Category deleteCategory(Long id) throws Exception{
         Category category = categoryRepository.findById(id).orElseThrow(() -> new Exception("No se encontró la entidad"));
         categoryRepository.delete(category);

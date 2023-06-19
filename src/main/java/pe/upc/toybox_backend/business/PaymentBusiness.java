@@ -12,8 +12,7 @@ import java.util.List;
 public class PaymentBusiness {
     @Autowired
     private PaymentRepository paymentRepository;
-    @Transactional
-    //register
+    @Transactional //register
     public Payment registerPayment(Payment payment) {
         return paymentRepository.save(payment);
     }

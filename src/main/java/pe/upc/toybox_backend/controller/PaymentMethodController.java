@@ -13,8 +13,8 @@ import pe.upc.toybox_backend.entities.PaymentMethod;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class PaymentMethodController {
     @Autowired
