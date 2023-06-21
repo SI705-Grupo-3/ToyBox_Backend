@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api")
+@RequestMapping("/api/payment-method")
 public class PaymentMethodController {
     @Autowired
     private PaymentMethodBusiness paymentMethodBusiness;
-    @PostMapping("/payment-method") //register
+    @PostMapping("/register") //register
     public ResponseEntity<PaymentMethodDTO> registerPaymentMethod(@RequestBody PaymentMethodDTO paymentMethodDTO){
         PaymentMethod paymentMethod;
         try {
@@ -30,13 +30,13 @@ public class PaymentMethodController {
         }
         return new ResponseEntity<PaymentMethodDTO>(paymentMethodDTO, HttpStatus.OK);
     }
-    @GetMapping("/payment-methods") //list
+    @GetMapping("/list") //list
     public ResponseEntity<List<PaymentMethodDTO>> listPaymentMethod(){
         List<PaymentMethod> list = paymentMethodBusiness.listPaymentMethod();
         List<PaymentMethodDTO> listDto = convertToLisDto(list);
         return new ResponseEntity<List<PaymentMethodDTO>>(listDto,HttpStatus.OK);
     }
-    @PutMapping("/payment-method") //update
+    @PutMapping("/update") //update
     public ResponseEntity<PaymentMethodDTO> updatePaymentMethod(@RequestBody PaymentMethodDTO pym) {
         PaymentMethodDTO paymentMethodDTO;
         PaymentMethod paymentMethod;
@@ -49,7 +49,7 @@ public class PaymentMethodController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo actualizar ...");
         }
     }
-    @DeleteMapping("/payment-method/{id}") //delete
+    @DeleteMapping("/delete/{id}") //delete
     public ResponseEntity<PaymentMethodDTO> deletePaymentMethod(@PathVariable(value = "id") Long id){
         PaymentMethod paymentMethod;
         PaymentMethodDTO paymentMethodDTO;

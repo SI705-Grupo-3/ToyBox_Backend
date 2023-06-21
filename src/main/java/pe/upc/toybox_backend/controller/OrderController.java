@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api")
+@RequestMapping("/api/order")
 public class OrderController {
     @Autowired
     private OrderBusiness orderBusiness;
-    @PostMapping("/order") //register
+    @PostMapping("/register") //register
     public ResponseEntity<OrderDTO> registerOrder(@RequestBody OrderDTO orderDTO){
         Order order;
         try {
@@ -30,7 +30,7 @@ public class OrderController {
         }
         return new ResponseEntity<OrderDTO>(orderDTO, HttpStatus.OK);
     }
-    @GetMapping("/orders") //list
+    @GetMapping("/list") //list
     public ResponseEntity<List<OrderDTO>> listOrder(){
         List<Order> list = orderBusiness.listOrder();
         List<OrderDTO> listDto = convertToLisDto(list);

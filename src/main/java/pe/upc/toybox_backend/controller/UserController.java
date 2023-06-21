@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 public class UserController {
     @Autowired
     private UserBusiness userBusiness;
-    @PostMapping("/user") //register
+    @PostMapping("/register") //register
     public ResponseEntity<UserDTO> registerUser(@RequestBody UserDTO userDTO){
         User user;
         try {
@@ -30,13 +30,13 @@ public class UserController {
         }
         return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
     }
-    @GetMapping("/users") //list
+    @GetMapping("/list") //list
     public ResponseEntity<List<UserDTO>> listUser(){
         List<User> list = userBusiness.listUser();
         List<UserDTO> listDto = convertToLisDto(list);
         return new ResponseEntity<List<UserDTO>>(listDto,HttpStatus.OK);
     }
-    @PutMapping("/user") //update
+    @PutMapping("/update") //update
     public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO usr) {
         UserDTO userDTO;
         User user;
@@ -49,7 +49,7 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo actualizar ...");
         }
     }
-    @DeleteMapping("/user/{id}") //delete
+    @DeleteMapping("/delete/{id}") //delete
     public ResponseEntity<UserDTO> deleteUser(@PathVariable(value = "id") Long id){
         User user;
         UserDTO userDTO;

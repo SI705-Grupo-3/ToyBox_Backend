@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api")
+@RequestMapping("/api/category")
 public class CategoryController {
     @Autowired
     private CategoryBusiness categoryBusiness;
-    @PostMapping("/category") //register
+    @PostMapping("/register") //register
     public ResponseEntity<CategoryDTO> registerCategory(@RequestBody CategoryDTO categoryDTO){
         Category category;
         try {
@@ -30,13 +30,13 @@ public class CategoryController {
         }
         return new ResponseEntity<CategoryDTO>(categoryDTO, HttpStatus.OK);
     }
-    @GetMapping("/categories") //list
+    @GetMapping("/list") //list
     public ResponseEntity<List<CategoryDTO>> listCategory(){
         List<Category> list = categoryBusiness.listCategory();
         List<CategoryDTO> listDto = convertToLisDto(list);
         return new ResponseEntity<List<CategoryDTO>>(listDto,HttpStatus.OK);
     }
-    @PutMapping("/category") //update
+    @PutMapping("/update") //update
     public ResponseEntity<CategoryDTO> updateCategory(@RequestBody CategoryDTO cat) {
         CategoryDTO categoryDTO;
         Category category;
@@ -49,7 +49,7 @@ public class CategoryController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo actualizar ...");
         }
     }
-    @DeleteMapping("/category/{id}") //delete
+    @DeleteMapping("/delete/{id}") //delete
     public ResponseEntity<CategoryDTO> deleteCategory(@PathVariable(value = "id") Long id){
         Category category;
         CategoryDTO categoryDTO;
