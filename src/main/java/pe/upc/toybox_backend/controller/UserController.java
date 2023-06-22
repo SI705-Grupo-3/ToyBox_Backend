@@ -61,6 +61,18 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo eliminar ...");
         }
     }
+    @GetMapping("/list/{id}") //list id
+    public ResponseEntity<UserDTO> listIdUser(@PathVariable(value = "id") Long id){
+        User user;
+        UserDTO userDTO;
+        try {
+            user = userBusiness.listIdUser(id);
+            userDTO = convertToDto(user);
+            return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo listar por id ...");
+        }
+    }
     private UserDTO convertToDto(User user) {
         ModelMapper modelMapper = new ModelMapper();
         UserDTO userDTO = modelMapper.map(user, UserDTO.class);
@@ -76,4 +88,18 @@ public class UserController {
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
+    @GetMapping("/get") //list
+    public ResponseEntity<UserDTO> getUser(@RequestParam("username") String username,
+                                           @RequestParam("password") String password){
+        UserDTO userDTO;
+        User user;
+        try {
+            user= userBusiness.getUser(username,password);
+            userDTO=convertToDto(user);
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No fue posible encontrar usuario");
+        }
+        return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
+    }
+
 }

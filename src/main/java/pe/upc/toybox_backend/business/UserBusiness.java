@@ -31,6 +31,14 @@ public class UserBusiness {
         userRepository.delete(user);
         return user;
     }
+    public User listIdUser(Long id) throws Exception{
+        User user = userRepository.findById(id).orElseThrow(() -> new Exception("No se encontró la entidad"));
+        return user;
+    }
+    public User getUser(String username, String password) throws Exception{
+        return userRepository.findUserByUsernameAndPassword(username,password);
+    }
+
 
     //
 }
