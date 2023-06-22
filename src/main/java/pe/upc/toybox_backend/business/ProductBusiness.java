@@ -29,4 +29,8 @@ public class ProductBusiness {
         Product product= productRepository.findById(id).orElseThrow(() -> new Exception("No se encontró la entidad"));
         return product;
     }
+    //list Product By Category ID
+    public List<Product> listProductsByCategoryId(Long id) throws Exception{
+        return productRepository.findByCategory_Id(id);
+    }
 }

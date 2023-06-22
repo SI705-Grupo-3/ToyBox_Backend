@@ -55,7 +55,18 @@ public class ProductController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo listar por id ...");
         }
     }
-
+    @GetMapping("/listCategory/{id}") //list id
+    public ResponseEntity<List<ProductDTO>> listProductsByCategoryId(@PathVariable(value = "id") Long id){
+        List<Product> list;
+        List<ProductDTO> listDTO;
+        try {
+            list = productBusiness.listProductsByCategoryId(id);
+            listDTO = convertToLisDto(list);
+            return new ResponseEntity<List<ProductDTO>>(listDTO, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo listar por id ...");
+        }
+    }
     private ProductDTO convertToDto(Product product) {
         ModelMapper modelMapper = new ModelMapper();
         ProductDTO productDTO = modelMapper.map(product, ProductDTO.class);
