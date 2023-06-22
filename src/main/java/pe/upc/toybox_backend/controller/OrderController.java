@@ -36,7 +36,18 @@ public class OrderController {
         List<OrderDTO> listDto = convertToLisDto(list);
         return new ResponseEntity<List<OrderDTO>>(listDto,HttpStatus.OK);
     }
-
+    @GetMapping("/list/{id}") //list id
+    public ResponseEntity<OrderDTO> listIdOrder(@PathVariable(value = "id") Long id){
+        Order order;
+        OrderDTO orderDTO;
+        try {
+            order = orderBusiness.listIdOrder(id);
+            orderDTO = convertToDto(order);
+            return new ResponseEntity<OrderDTO>(orderDTO, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo listar por id ...");
+        }
+    }
     private OrderDTO convertToDto(Order order) {
         ModelMapper modelMapper = new ModelMapper();
         OrderDTO orderDTO = modelMapper.map(order, OrderDTO.class);

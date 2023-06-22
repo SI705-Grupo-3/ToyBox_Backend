@@ -20,5 +20,9 @@ public class PaymentBusiness {
     public List<Payment> listPayment() {
         return paymentRepository.findAll();
     }
-
+    //list Payment By ID
+    public Payment listIdPayment(Long id) throws Exception{
+        Payment payment= paymentRepository.findById(id).orElseThrow(() -> new Exception("No se encontró la entidad"));
+        return payment;
+    }
 }

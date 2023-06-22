@@ -32,6 +32,10 @@ public class CategoryBusiness {
         categoryRepository.delete(category);
         return category;
     }
+    //list Category By ID
+    public Category listIdCategory(Long id) throws Exception{
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new Exception("No se encontró la entidad"));
+        return category;
+    }
 
-    //
 }

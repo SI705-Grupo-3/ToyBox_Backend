@@ -20,5 +20,9 @@ public class ProductRegistrationBusiness {
     public List<ProductRegistration> listProductRegistration() {
         return productRegistrationRepository.findAll();
     }
-
+    //list Category By ID
+    public ProductRegistration listIdProductRegistration(Long id) throws Exception{
+        ProductRegistration productRegistration = productRegistrationRepository.findById(id).orElseThrow(() -> new Exception("No se encontró la entidad"));
+        return productRegistration;
+    }
 }

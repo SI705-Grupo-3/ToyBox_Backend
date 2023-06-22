@@ -36,7 +36,18 @@ public class PaymentController {
         List<PaymentDTO> listDto = convertToLisDto(list);
         return new ResponseEntity<List<PaymentDTO>>(listDto,HttpStatus.OK);
     }
-
+    @GetMapping("/list/{id}") //list id
+    public ResponseEntity<PaymentDTO> listIdPayment(@PathVariable(value = "id") Long id){
+        Payment payment;
+        PaymentDTO paymentDTO;
+        try {
+            payment = paymentBusiness.listIdPayment(id);
+            paymentDTO = convertToDto(payment);
+            return new ResponseEntity<PaymentDTO>(paymentDTO, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo listar por id ...");
+        }
+    }
     private PaymentDTO convertToDto(Payment payment) {
         ModelMapper modelMapper = new ModelMapper();
         PaymentDTO paymentDTO = modelMapper.map(payment, PaymentDTO.class);

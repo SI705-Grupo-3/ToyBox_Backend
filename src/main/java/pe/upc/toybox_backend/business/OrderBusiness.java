@@ -20,5 +20,9 @@ public class OrderBusiness {
     public List<Order> listOrder() {
         return orderRepository.findAll();
     }
-
+    //list Order By ID
+    public Order listIdOrder(Long id) throws Exception{
+        Order order = orderRepository.findById(id).orElseThrow(() -> new Exception("No se encontró la entidad"));
+        return order;
+    }
 }

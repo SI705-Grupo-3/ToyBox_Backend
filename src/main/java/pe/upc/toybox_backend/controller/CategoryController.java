@@ -61,6 +61,18 @@ public class CategoryController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo eliminar ...");
         }
     }
+    @GetMapping("/list/{id}") //list id
+    public ResponseEntity<CategoryDTO> listIdCategory(@PathVariable(value = "id") Long id){
+        Category category;
+        CategoryDTO categoryDTO;
+        try {
+            category = categoryBusiness.listIdCategory(id);
+            categoryDTO = convertToDto(category);
+            return new ResponseEntity<CategoryDTO>(categoryDTO, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo listar por id ...");
+        }
+    }
     private CategoryDTO convertToDto(Category category) {
         ModelMapper modelMapper = new ModelMapper();
         CategoryDTO categoryDTO = modelMapper.map(category, CategoryDTO.class);

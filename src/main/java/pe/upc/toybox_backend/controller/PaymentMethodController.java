@@ -61,6 +61,18 @@ public class PaymentMethodController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo eliminar ...");
         }
     }
+    @GetMapping("/list/{id}") //list id
+    public ResponseEntity<PaymentMethodDTO> listIdPaymentMethod(@PathVariable(value = "id") Long id){
+        PaymentMethod paymentMethod;
+        PaymentMethodDTO paymentMethodDTO;
+        try {
+            paymentMethod = paymentMethodBusiness.listIdPaymentMethod(id);
+            paymentMethodDTO = convertToDto(paymentMethod);
+            return new ResponseEntity<PaymentMethodDTO>(paymentMethodDTO, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo listar por id ...");
+        }
+    }
     private PaymentMethodDTO convertToDto(PaymentMethod paymentMethod) {
         ModelMapper modelMapper = new ModelMapper();
         PaymentMethodDTO paymentMethodDTO = modelMapper.map(paymentMethod, PaymentMethodDTO.class);

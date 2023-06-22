@@ -20,5 +20,9 @@ public class OrderDetailBusiness {
     public List<OrderDetail> listOrderDetail() {
         return orderDetailRepository.findAll();
     }
-
+    //list Order Detail By ID
+    public OrderDetail listIdOrderDetail(Long id) throws Exception{
+        OrderDetail orderDetail = orderDetailRepository.findById(id).orElseThrow(() -> new Exception("No se encontró la entidad"));
+        return orderDetail;
+    }
 }

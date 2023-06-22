@@ -24,5 +24,9 @@ public class ProductBusiness {
     public List<Product> searchByPriceRange(double minPrice, double maxPrice) {
         return productRepository.findByPriceGreaterThanEqualAndPriceLessThanEqual(minPrice, maxPrice);
     }
-
+    //list Product By ID
+    public Product listIdProduct(Long id) throws Exception{
+        Product product= productRepository.findById(id).orElseThrow(() -> new Exception("No se encontró la entidad"));
+        return product;
+    }
 }

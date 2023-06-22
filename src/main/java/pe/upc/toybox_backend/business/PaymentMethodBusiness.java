@@ -32,6 +32,9 @@ public class PaymentMethodBusiness {
         paymentMethodRepository.delete(paymentMethod);
         return paymentMethod;
     }
-
-    //
+    //list Payment Method By ID
+    public PaymentMethod listIdPaymentMethod(Long id) throws Exception{
+        PaymentMethod paymentMethod = paymentMethodRepository.findById(id).orElseThrow(() -> new Exception("No se encontró la entidad"));
+        return paymentMethod;
+    }
 }

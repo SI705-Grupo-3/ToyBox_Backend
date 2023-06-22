@@ -36,7 +36,18 @@ public class ProductRegistrationController {
         List<ProductRegistrationDTO> listDto = convertToLisDto(list);
         return new ResponseEntity<List<ProductRegistrationDTO>>(listDto,HttpStatus.OK);
     }
-
+    @GetMapping("/list/{id}") //list id
+    public ResponseEntity<ProductRegistrationDTO> listIdProductRegistration(@PathVariable(value = "id") Long id){
+        ProductRegistration productRegistration;
+        ProductRegistrationDTO productRegistrationDTO;
+        try {
+            productRegistration = productRegistrationBusiness.listIdProductRegistration(id);
+            productRegistrationDTO = convertToDto(productRegistration);
+            return new ResponseEntity<ProductRegistrationDTO>(productRegistrationDTO, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo listar por id ...");
+        }
+    }
     private ProductRegistrationDTO convertToDto(ProductRegistration productRegistration) {
         ModelMapper modelMapper = new ModelMapper();
         ProductRegistrationDTO productRegistrationDTO = modelMapper.map(productRegistration, ProductRegistrationDTO.class);
