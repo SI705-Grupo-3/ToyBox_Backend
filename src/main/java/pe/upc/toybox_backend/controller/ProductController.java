@@ -36,6 +36,13 @@ public class ProductController {
         List<ProductDTO> listDto = convertToLisDto(list);
         return new ResponseEntity<List<ProductDTO>>(listDto,HttpStatus.OK);
     }
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductDTO>> searchByPriceRange(@RequestParam("minPrice") double minPrice,
+                                                            @RequestParam("maxPrice") double maxPrice) {
+        List<Product> listF = productBusiness.searchByPriceRange(minPrice, maxPrice);
+        List<ProductDTO> listDto = convertToLisDto(listF);
+        return new ResponseEntity<List<ProductDTO>>(listDto,HttpStatus.OK);
+    }
 
     private ProductDTO convertToDto(Product product) {
         ModelMapper modelMapper = new ModelMapper();

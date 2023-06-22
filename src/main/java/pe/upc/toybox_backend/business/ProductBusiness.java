@@ -20,5 +20,9 @@ public class ProductBusiness {
     public List<Product> listProduct() {
         return productRepository.findAll();
     }
+    //search by price
+    public List<Product> searchByPriceRange(double minPrice, double maxPrice) {
+        return productRepository.findByPriceGreaterThanEqualAndPriceLessThanEqual(minPrice, maxPrice);
+    }
 
 }
