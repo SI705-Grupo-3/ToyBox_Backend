@@ -89,12 +89,11 @@ public class UserController {
                 .collect(Collectors.toList());
     }
     @GetMapping("/get") //list
-    public ResponseEntity<UserDTO> getUser(@RequestParam("username") String username,
-                                           @RequestParam("password") String password){
+    public ResponseEntity<UserDTO> getUser(@RequestParam("username") String username){
         UserDTO userDTO;
         User user;
         try {
-            user= userBusiness.getUser(username,password);
+            user= userBusiness.getUser(username);
             userDTO=convertToDto(user);
         }catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No fue posible encontrar usuario");

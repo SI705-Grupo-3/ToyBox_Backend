@@ -9,5 +9,4 @@ import pe.upc.toybox_backend.entities.User;
 @Repository
 public interface UserRepository  extends JpaRepository<User, Long> {
     public User findUserByUsername(String username);
-    public User findUserByUsernameAndPassword(String username, String password);
 }

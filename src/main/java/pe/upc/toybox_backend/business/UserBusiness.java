@@ -35,8 +35,8 @@ public class UserBusiness {
         User user = userRepository.findById(id).orElseThrow(() -> new Exception("No se encontró la entidad"));
         return user;
     }
-    public User getUser(String username, String password) throws Exception{
-        return userRepository.findUserByUsernameAndPassword(username,password);
+    public User getUser(String username) throws Exception{
+        return userRepository.findUserByUsername(username);
     }
 
 
