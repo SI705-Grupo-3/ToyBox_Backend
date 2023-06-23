@@ -114,6 +114,8 @@
                 </configuration>
             </plugin>
         </plugins>
+        <!--AWS-->
+        <finalName>backend</finalName>
     </build>
     <repositories>
         <repository>
@@ -150,5 +152,7 @@
                 <enabled>false</enabled>
             </releases>
         </pluginRepository>
+
     </pluginRepositories>
+
 </project>
