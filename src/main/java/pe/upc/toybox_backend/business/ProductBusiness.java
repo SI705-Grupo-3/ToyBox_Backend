@@ -33,4 +33,15 @@ public class ProductBusiness {
     public List<Product> listProductsByCategoryId(Long id) throws Exception{
         return productRepository.findByCategory_Id(id);
     }
+    @Transactional //update
+    public Product updateProduct(Product product) throws Exception{
+        productRepository.findById(product.getId()).orElseThrow(() -> new Exception("No se encontró la entidad"));
+        return productRepository.save(product);
+    }
+    @Transactional //delete
+    public Product deleteProduct(Long id) throws Exception{
+        Product product = productRepository.findById(id).orElseThrow(() -> new Exception("No se encontró la entidad"));
+        productRepository.delete(product);
+        return product;
+    }
 }

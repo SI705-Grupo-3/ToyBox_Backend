@@ -55,6 +55,31 @@ public class ProductController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo listar por id ...");
         }
     }
+    @PutMapping("/update") //update
+    public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO prod) {
+        ProductDTO productDTO;
+        Product product;
+        try {
+            product = convertToEntity(prod);
+            product = productBusiness.updateProduct(product);
+            productDTO = convertToDto(product);
+            return new ResponseEntity<ProductDTO>(productDTO, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo actualizar ...");
+        }
+    }
+    @DeleteMapping("/delete/{id}") //delete
+    public ResponseEntity<ProductDTO> deleteProduct(@PathVariable(value = "id") Long id){
+        Product product;
+        ProductDTO productDTO;
+        try {
+            product = productBusiness.deleteProduct(id);
+            productDTO = convertToDto(product);
+            return new ResponseEntity<ProductDTO>(productDTO, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se pudo eliminar ...");
+        }
+    }
     @GetMapping("/listCategory/{id}") //list id
     public ResponseEntity<List<ProductDTO>> listProductsByCategoryId(@PathVariable(value = "id") Long id){
         List<Product> list;
